@@ -1,0 +1,21 @@
+/* In CSS we can use a "Selector" to specify what we want to style, this selector is the "." + control name. Such as
+ ".button". */
+/* To create a class to group various controls you can use "." + class, the class is defined in the FXML file. */
+/* When referencing to an ID we use the  hash character. */
+/* Link for the CSS: https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html */
+.button
+{
+    -fx-background-color: green;
+    -fx-text-fill: white;
+}
+
+#button_three
+{
+    -fx-background-color: blue;
+    -fx-text-fill: white;
+}
+
+.b2
+{
+    -fx-background-color: purple;
+}

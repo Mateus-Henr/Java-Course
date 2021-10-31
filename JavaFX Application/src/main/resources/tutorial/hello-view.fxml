@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+
+<!-- The "stylesheets" property is used to reference the CSS file. Bear in mind that JavaFX uses a default stylesheet
+to customize its controls. -->
+<!-- You can also change the appearance of JavaFX by changing its theme (that's a set of CSS definitions). The JavaFX
+default theme is the "Medina" theme. -->
+<?import javafx.scene.control.RadioButton?>
+<GridPane xmlns:fx="http://javafx.com/fxml"
+          fx:controller="tutorial.HelloController" hgap="10" vgap="10" alignment="CENTER" stylesheets="@styles.css">
+    <!-- "style" is used to insert css code sin the controls. -->
+    <!-- Such as in a web page, we may put our CSS code in another file, since it makes things more organized if
+     any future modification were to be needed and to avoid having to modify various parts of the code. -->
+    <Button text="Button One" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+
+    <Button text="Button Two" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <!-- When a CSS is included in the FXML file it takes precedence over the CSS in the stylesheet, "overrides" it.
+    however defining CSS in the FXML can be difficult to manage in larger applications. -->
+
+    <!-- The "id" in this button is to reference from the "fx:id". "styleClass" can be used to pass a class to a
+    control.-->
+    <Button text="Button Three" id="button_three" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+    <Button text="Button Four" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+    <Button styleClass="b2" text="Button Five" GridPane.rowIndex="0" GridPane.columnIndex="4"/>
+
+    <RadioButton text="Choice 1" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+</GridPane>
