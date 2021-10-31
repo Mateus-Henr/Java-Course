@@ -1,0 +1,116 @@
+Modules
+
+Available since JDK 9.
+You can think of a Java application as collection of modules.
+Its purpose is to solve the problems involved with developing and deploying Java apps before Java 9.
+
+A module is a named collection of data and code.
+They can contain Java code that is organized as a set of packages. Each package can contain classes, interfaces and so on.
+
+
+
+>Main Points
+1. Scalable platform
+    • The ability to scale the platform down to smaller computing devices is achieved by moving from a monolithic runtime.
+2. Security and maintainability
+    • To make a more maintainable platform code base that has better organization,
+    and has its internal API hidden, so we have better modular interfaces to improve platform security.
+3. Improved Application performance
+    • A platform that is smaller with only the necessary runtimes, resulting in faster performance.
+4. Easier developer experience
+    • As a result of the Module system and the modular platform combination to make it easier for developers
+    to create applications and libraries.
+
+
+
+
+>Configurations
+name -> Unique
+inputs -> What the module needs to use and what is required for the module to be compiled and run.
+outputs -> What the module outputs or exports to other modules.
+
+The Java SE 9 Platform is divided into a set of modules that are known as platform modules.
+This provides a scalable Java Runtime. Standard modules have names prefixed with java.
+For example java.base, java.sql and so on.
+
+
+
+>Module Descriptor
+Every module comes with a module descriptor file that describes the module
+and contains metadata about the module.
+
+The module descriptor file is always located directly at the module root folder,
+and always has the name module-info.java.
+
+
+
+>Module Declaration
+The "module" keyword + the module name is used to define a module.
+Inside the curly braces, you can add metadata (inputs and outputs).
+
+A module declaration introduces a module name that can be used in other
+module declarations to express relationships between modules.
+
+A module name consists of one or more Java identifiers separated by ".
+tokens (similar to packages)
+
+
+
+>Modules Statements
+They can be:
+• Exports statement (packages that are exported)
+• Opens statement ("opens" can't be used in open module because you can't open what's already opened)
+• Requires statement (dependencies between modules)
+• Uses statement (specify the service that the module consumes)
+• Provides statement (specify the service implementations)
+
+
+
+>Types of Modules
+The kind of a module determines access to the module's types, and the
+members of those types, for code outside the module.
+
+Named Module
+Each has a name.
+Can be normal (basic modules or open ones) or automatic modules.
+They are modules declared in the "module.info.java" file (the descriptor file) (only normal)
+All platform modules are named.
+
+Normal Module
+A normal module, without the open modifier, grants access at compile time and run time to types in only those packages
+which are explicitly exported.
+Does not export any of its packages by default.
+
+Automatic modules
+Created after adding a JAR file to the module path (automatically)
+Requires by default all platform modules, all our own modules and all other automatic modules.
+It exports all its packages by default
+
+Basic modules
+Modules that aren't open ones or automatic.
+
+Open Module
+An open module, with the open modifier, grants access at compile time to types in only those packages which are
+explicitly exported, but grants access at run time to types in all its packages, as if all packages had been exported.
+
+Unnamed modules
+Although they have a name we don't declare them.
+It exports all of its packages.
+A named can't require an unnamed.
+It's a module made up of all JAR files from the classpath.
+
+Aggregator modules
+They just have a module descriptor (does not have code on their own)
+They collect and export contents of other modules.
+We put the modules together in an aggregator module and then use the aggregator module.
+Ex: "java.se".
+
+Module path.
+It can represent:
+• A path to a sequence of folders that contain modules.
+• A path to a modular JAR file.
+• A path to a JMOD file (extended version of a JAR).
+
+A module path is used by the compiler to find and resolve modules.
+Every module from a module path needs to have a module declaration (module-info.java).
+A classpath represents a sequence of JAR files.

@@ -1,0 +1,45 @@
+Java Networking
+
+A networking is a system of computer connected together so they can share resources and communicate with one another.
+It refers to how the connected computers communicate.
+
+In the Java scope
+The "java.net" package contains classes for establishing connections between computers and then send messages between them.
+
+Ports are used to rout data to the correct application.
+
+IP stands for Internet Protocol. You may have heard the term TCP/IP. This refers
+to using the TCP protocol with IP addresses, which doesn't necessarily mean the
+host is connected to the Internet. Two applications running on the same host
+can use TCP/IP to communicate with each other. When the client and server are
+on the same host, usually the IP address 127.0.0.1, which is referred to as
+localhost, is used to identify the host.
+
+java.net package
+It has two APIs, the low-level (most advanced) and the high-level.
+When working with networking you'll be working with abstractions.
+
+Client/Server connection
+TCP, which stands for Transmission Control Protocol, establishes a two-way connection between hosts,
+and this connection is reliable in the sense that the two hosts talk to each other.
+When used with Internet addresses, you get TCP/IP, which uses the client/server model.
+
+When communicating using TCP/IP, the sequence of events is as follows:
+1. The client opens a connection to the server
+2. The clients sends a request to the server
+3. The server sends a response to the client
+
+When using the low-level networking API, you'll use sockets to establish
+connections, send requests, and receive responses. A socket is one end-point of
+the two-way connection. The client will have a socket, and the server will have a
+socket.
+
+When you have multiple clients connecting to the same server, they'll use the
+same port number, but each client will have its own socket. You'll use the Socket
+class for the client socket, and the ServerSocket class for the server's socket.
+
+
+Underneath the covers, specific messages have to be sent to establish a
+connection between the client and the server (a process that's called
+handshaking), and the data has to be sent as packets, which must be in a
+specific format.

@@ -1,0 +1,57 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<GridPane fx:controller="tutorial.first.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <!-- Text Field-->
+    <!-- Gives the use the ability of typing things in. -->
+    <!-- To initialize the field with text you can use the "text" property, but we need to add code to remove the text
+     when it's clicked. -->
+    <TextField GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+
+    <!-- Password Field -->
+    <!-- Masks what is being type to it. Cannot be copied from. -->
+    <PasswordField GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+    <!-- ComboBox -->
+    <!-- Also gives the user the choice to choose between several options. -->
+    <!-- It's used for when you have several options, since they take less space than "Radio Buttons". -->
+    <!-- Using "GridPane.columnSpan" to make the column larger to appear all the content of the control. -->
+    <!-- The "editable" property is used when you want to give the user the possibility of editing the box. Rarely
+     used. -->
+    <ComboBox GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.columnSpan="2">
+        <!-- Adding a list of items to populate it. -->
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="This is Option 1"/>
+                <String fx:value="This is Option 2"/>
+                <String fx:value="This is Option 3"/>
+                <String fx:value="This is Option 4"/>
+                <String fx:value="This is Option 5"/>
+            </FXCollections>
+        </items>
+        <!-- Selecting a default option -->
+        <value>
+            <String fx:value="This is Option 4"/>
+        </value>
+    </ComboBox>
+
+    <!-- ChoiceBox -->
+    <!-- Very similar to the ComboBox apart from the checkmark that here there is. -->
+    <!-- More suitable to a smaller number of items. -->
+    <!-- Generally it's best to use the "ComboBox" -->
+    <ChoiceBox GridPane.rowIndex="0" GridPane.columnIndex="4">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="CB 1"/>
+                <String fx:value="CB 2"/>
+                <String fx:value="CB 3"/>
+                <String fx:value="CB 4"/>
+                <String fx:value="CB 5"/>
+            </FXCollections>
+        </items>
+    </ChoiceBox>
+
+
+</GridPane>

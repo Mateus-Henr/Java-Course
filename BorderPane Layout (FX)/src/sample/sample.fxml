@@ -1,0 +1,57 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane fx:controller="sample.Controller"
+            xmlns:fx="http://javafx.com/fxml">
+    <!-- As with BorderPane we organize the children based on the screen's position, the "alignment" property doesn't exist -->
+    <!-- The HBox is a child of the BorderPane layout (HBox is a nested layout) -->
+    <!-- When using BorderPane, nested layout is the only way of making a row of buttons -->
+    <!-- EACH POSITION CAN HAVE JUST ONE CHILD (so we cannot put multiple buttons at the same position) -->
+
+    <!-- Imagine that the HBox is a box that's another box (BorderPane), the most inner box have multiple children or
+    objects inside it, therefore these objects can be organized by this "most inner box" (HBox) -->
+    <top>
+        <!-- The alignment property for label sets the place where the text, for example is going to sit within it,
+        in other words when there's empty space within the label -->
+        <!-- As we are defining the label within the "top" position it's been given the entire window's width, however
+        most controls won't stretch to fit the width that's been allocated, for example the label below -->
+        <Label text="This label is in the top position" alignment="CENTER"
+               BorderPane.alignment="CENTER"
+               style="-fx-border-color: blue; -fx-border: 3; -fx-border-style: dashed"/>
+        <!-- The label will get its preferred width that's basically just the size of the text in it -->
+        <!-- So in order to center this, we need to center the label itself rather than its text, as above -->
+    </top>
+
+    <left>
+        <Label text="This label is in the left position" alignment="center"/>
+    </left>
+
+    <center>
+        <!-- The center position will be the place between the "right" and "left" label ("bottom" and "top" as well),
+        so as it's in the middle the positions on its sides will have their preferred widths/heights -->
+        <Label text="This label is in the center position ad has really looooooooooooooooooooooooooooooooooooooong text"/>
+    </center>
+
+    <right>
+        <Label text="This label is in the right position" alignment="center"/>
+    </right>
+
+
+    <bottom>
+        <!-- In the alignment here, it doesn't matter which height, since this is inside the "bottom" position the
+        BorderPane that takes care of the height -->
+        <HBox spacing="10" alignment="TOP_RIGHT">
+            <padding>
+                <Insets bottom="10" right="10"/>
+            </padding>
+            <Button text="Okay" prefWidth="90"/>
+            <Button text="Cancel" prefWidth="90"/>
+            <Button text="Help" prefWidth="90"/>
+        </HBox>
+    </bottom>
+    <!-- By using the position's name as we've done above we set the position to a control/child -->
+    <!-- If we don't set a position to the HBox inside the BorderPane it will get to a default position -->
+</BorderPane>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+
+<!-- The "onAction" property is used to associate an event handler to a control (use a "#" when pointing it). -->
+<!-- To retrieve data from a TextField we need to assign an fx:id to it. So we can create an instance for that
+id so then we can get data from it. THE VARIABLE MUST HAVE THE SAME NAME AS THE FX:ID. -->
+
+<!-- The event "onKeyReleased" is used after a key is pressed (for this reason the "release"). -->
+<?import javafx.scene.control.TextField?>
+<GridPane alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
+          fx:controller="tutorial.first.HelloController" hgap="10" vgap="10">
+    <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="0" onKeyReleased="#handleKeyRelease"/>
+    <Button fx:id="helloButton" text="Say Hello" GridPane.rowIndex="1" GridPane.columnIndex="0"
+            onAction="#onButtonClicked"/>
+    <Button fx:id="byeButton" text="Say Hi" GridPane.rowIndex="1" GridPane.columnIndex="1" onAction="#onButtonClicked"/>
+</GridPane>

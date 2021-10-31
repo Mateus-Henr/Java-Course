@@ -1,0 +1,81 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+
+<GridPane fx:controller="tutorial.first.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <Button GridPane.rowIndex="0" GridPane.columnIndex="0" text="Click Me">
+        <graphic>
+            <ImageView>
+                <!-- We are using "@" to reference our the root of the project (where the "jlfgr" jar file is at).
+                Then we are getting in the desired folder. -->
+                <!-- The "jlfgr" jar basically contains images to be used. -->
+                <!-- A button can have only text, or only graphics or both. (The same for labels) -->
+                <Image url="@/toolbarButtonGraphics/general/TipOfTheDay24.gif"/>
+            </ImageView>
+        </graphic>
+    </Button>
+    <!-- By default label texts don't wrap, for them to do so you need to set the "wrapText" property to true-->
+    <Label GridPane.rowIndex="0" GridPane.columnIndex="1" text="This is a label"
+           textFill="blue" wrapText="true">
+        <font>
+            <Font name="Arial italic" size="40"/>
+        </font>
+        <graphic>
+            <ImageView>
+                <Image url="@/toolbarButtonGraphics/general/Information24.gif"/>
+            </ImageView>
+        </graphic>
+    </Label>
+    <!-- Radio Buttons -->
+    <!-- They can be selected or deselected, you can also group them together -->
+    <!-- It's called "Radio Buttons" because, they used to have a set of preset stations and we would select a
+    station by pressing a that station's button and a radio can just be tuned at one station at a time so the same logic
+    applied to these buttons. -->
+    <!-- If you don't group the radio buttons together you won't have the behaviour described above. -->
+    <!-- As "ToggleGroup" doesn't descend from "Node" it can't be added to a scene graph, therefore we need to use
+    the "fx:define" to use it. We use "fx" when we add something in the fxml that isn't part of the scene graph.-->
+    <fx:define>
+        <ToggleGroup fx:id="colorToggleGroup"/>
+    </fx:define>
+    <!-- When we are referring to an fx id value we put a dollar symbol in front of it. (And IntelIJ looks
+    for an "fx:define" with the id that we mentioned)-->
+    <!-- For the default selection we use the "select" property. -->
+    <!-- It's convenient to put the buttons in a box so we only have to select the row/column once. -->
+    <VBox GridPane.rowIndex="0" GridPane.columnIndex="2">
+        <!-- If we don't use the VBOX, by default the position of the buttons on the screen would be horizontal. -->
+        <RadioButton text="Red" toggleGroup="$colorToggleGroup"/>
+        <RadioButton text="Blue" toggleGroup="$colorToggleGroup" selected="true"/>
+        <RadioButton text="Green" toggleGroup="$colorToggleGroup"/>
+    </VBox>
+    <!-- CheckBox -->
+    <!-- We use it when there are just two choices (for example when we need to agree with the "terms of conditions"
+    on a website). -->
+    <!-- Normally we use just two states, but the JavaFX control allows a third that is called the "indeterminate state"
+     that needs to be turned on and when it's on it'll initially contains a dash and after the use clicking on it the
+     dash can't return. (We are using it below) BUT USUALLY THERE'S NO REAL USE FOR IT. -->
+    <CheckBox text="Subscribe to our newsletter" GridPane.rowIndex="0" GridPane.columnIndex="3" indeterminate="true"/>
+
+    <VBox GridPane.rowIndex="0" GridPane.columnIndex="4">
+        <CheckBox text="Dog"/>
+        <CheckBox text="Cat"/>
+        <CheckBox text="Bird"/>
+    </VBox>
+    <!-- We can't group "CheckBoxes" together, once they don't descend from the "ToggleButton" class, we can do it
+    just visually. -->
+    <!-- Toggle Button is a control that when pressed it stays. -->
+    <HBox GridPane.rowIndex="0" GridPane.columnIndex="5">
+        <ToggleButton text="Toggle Me"/>
+        <ToggleButton text="Hello"/>
+        <ToggleButton text="Good-Bye"/>
+    </HBox>
+</GridPane>

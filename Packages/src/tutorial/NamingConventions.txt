@@ -1,0 +1,40 @@
+Objective is to make readability easier by adopting certain conventions.
+
+Packages
+- Lowercase
+- Unique name
+- Reversed domain name (usually)
+- Invalid values: starting with a number, having a dash and having a Java keyword.
+Ex: java.lang
+
+Class Names
+- CamelCase (Starting with capital letter)
+- Nouns
+Ex: LinkedList
+
+Interface Names
+- CamelCase (Starting with capital letter)
+- Consider what the object will do for the name.
+Ex: Comparable
+
+Method Names
+- mixedCase
+- Often verbs
+- Reflect the function performed or the result returned
+Exs: getName() and size()
+
+Constants
+- Entirely in capital letter.
+- Separate words with underscore.
+- Declared using the final keyword.
+Ex: MAX_INT
+
+Variable Names
+- mixedCase (Start with lower case)
+- Meaningful and indicative.
+- Can't use underscores.
+Ex: sydneySwans
+
+Type Parameters
+- Single character in capital letter.
+Exs: E (Element), T (Type), K (Key)

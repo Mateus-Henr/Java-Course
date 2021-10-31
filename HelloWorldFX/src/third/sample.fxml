@@ -1,0 +1,14 @@
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<!-- It's considered best practise to define the UI through the FXML file -->
+<!-- Since we don't have to touch the Java code it's more organized -->
+<?import javafx.scene.text.Font?>
+<GridPane fx:controller="third.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <Label text="Welcome To JavaFX!" textFill="green"><!-- Creating our label as we did in the previous package-->
+        <font>
+            <!-- To define a font you need to pass as a child component-->
+            <Font name="Times New Roman bold" size="70"/> <!-- To customize the font we need to pass the attr in the name-->
+        </font>
+    </Label>
+</GridPane>

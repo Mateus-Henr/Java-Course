@@ -1,0 +1,20 @@
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.Button?>
+<FlowPane fx:controller="tutorial.first.Controller"
+          xmlns:fx="http://javafx.com/fxml" orientation="VERTICAL">
+    <!-- As all the buttons aren't able to fit in only one row they some of them will be split up to the second row -->
+    <!-- If we were using "VBox" here instead of "FlowPane", the children would still be align into columns but they
+    wouldn't resized according to the size of the window, they would be static -->
+    <Button text="Button One"/>
+    <Button text="Button Two"/>
+    <Button text="Button Three"/>
+    <Button text="Button Four"/>
+    <Button text="Button Five"/>
+    <Button text="Button Six"/>
+    <Button text="Button Seven"/>
+    <Button text="Button Eight"/>
+    <Button text="Button Nine"/>
+    <Button text="Button Ten"/>
+    <!-- This layout is interesting to use when tou don't know how many children there'll be, like reading children
+     based on a database record, otherwise it might be better to use "VBox" or "HBox" -->
+</FlowPane>

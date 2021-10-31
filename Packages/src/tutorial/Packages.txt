@@ -1,0 +1,4 @@
+Packages
+
+As there are lots of programmers worldwide, conflicts are inevitable.
+So mechanism is needed to fully specify class.

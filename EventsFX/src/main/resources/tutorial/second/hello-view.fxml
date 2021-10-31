@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.CheckBox?>
+
+<!-- We could add an event handler that listens for whenever the CheckBox is selected or deselected. But this is not
+usually done, for most controls we care about the state of it when the user finishes using it. "OK" button in a form,
+for example. -->
+<!-- When we have a CheckBox on a Dialog we only need to know if it's selected when the user presses "OK". In other
+words, we don't care how many times the user selected/deselected it. Specific cases such the use of Slider you will
+have to listen to the control, or cases in where the state of the control changes something in the UI. -->
+
+<!-- Every control has a set of event that can raise when a user interacts with it. -->
+<GridPane alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
+          fx:controller="tutorial.second.HelloController" hgap="10" vgap="10">
+    <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="0" onKeyReleased="#handleKeyRelease"/>
+    <Button fx:id="helloButton" text="Say Hello" GridPane.rowIndex="1" GridPane.columnIndex="0"
+            onAction="#onButtonClicked"/>
+    <Button fx:id="byeButton" text="Say Hi" GridPane.rowIndex="1" GridPane.columnIndex="1" onAction="#onButtonClicked"/>
+    <CheckBox fx:id="ourCheckBox" text="Clear the field after saying hello or bye" GridPane.rowIndex="2"
+              GridPane.columnIndex="0" GridPane.columnSpan="2" onAction="#handleChange"/>
+</GridPane>

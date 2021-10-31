@@ -1,0 +1,28 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<!-- GridPane lays out its children in flexible rows and columns -->
+<!-- Each position in a grid is call a cell and by default rows and columns will be sized to fit their content -->
+<?import javafx.scene.layout.ColumnConstraints?>
+<GridPane fx:controller="tutorial.first.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
+          gridLinesVisible="true">
+    <columnConstraints>
+        <!-- Using the "ColumnConstraints" to set the initial width for each column -->
+        <!-- The order is important -->
+        <ColumnConstraints percentWidth="50.0"/>
+        <ColumnConstraints percentWidth="50.0"/>
+    </columnConstraints>
+    <!-- The "gaps" above are the space between rows and columns -->
+    <!-- In order for the buttons don't overlap each other we need to specify the row and column -->
+    <!-- If they're not specified they will be placed at column 0, row 0 which is the default position -->
+    <Button text="Button One" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <Button text="Button Two" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <Button text="Button Three" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <Button text="Really Long Button Four More Text More Text More Text More Text More Text More Text More Text More Text" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Button text="Button Five" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <!-- OBS: The size of the columns will be based on the widest control in that column (the same for rows) -->
+    <!-- Depending on the size of the content of a control, resizing the window might be necessary -->
+</GridPane>

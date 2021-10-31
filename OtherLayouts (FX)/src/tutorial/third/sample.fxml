@@ -1,0 +1,16 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:controller="tutorial.first.Controller"
+           xmlns:fx="http://javafx.com/fxml">
+    <!-- The order here matters to decide what's going to be on the top of the stack -->
+    <!-- As in a normal stack the last element will be on the top -->
+    <Label text="The label text" style="-fx-background-color: green"/>
+    <Button text="Button One" style="-fx-background-color: red"/>
+    <Label text="The second label text" style="-fx-background-color: blue"/>
+    <!-- Doing it this way the children will be on top of each other, in this case, the label is on the top of the
+    button -->
+
+    <!-- When to use "StackPane" layout
+     It could be used if we needed to put a label on the top of an image (similar to layers in photoshop) -->
+</StackPane>

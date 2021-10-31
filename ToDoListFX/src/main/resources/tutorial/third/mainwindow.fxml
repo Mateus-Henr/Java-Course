@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane fx:id="mainBorderPane" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tutorial.third.HelloController">
+    <!-- As we will be start using a ToolBar as well we will have to use a VBox to keep the Menu and the ToolBar. -->
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="New..." onAction="#showNewItemDialog"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Exit" onAction="#handleExit"/>
+                    </items>
+                </Menu>
+            </MenuBar>
+            <ToolBar>
+                <!-- It's important to remember that the event doesn't care how it was raised, in other words it can
+                be used multiple times throughout the code. Which is also a good practise to keep them as generic as
+                possible. -->
+                <HBox>
+                    <!-- The icon has been added by adding the jar file to the "Modules" of this project. "Classes" was
+                    selected. "toolTip" property is used to add a pop-up description to the button, but it expects
+                    an instance of the ToolTip class rather than a String. -->
+                    <Button onAction="#showNewItemDialog">
+                        <!-- "graphic" is a Button property, however the ones that come after it are classes that the
+                        graphic property expects. -->
+                        <!-- When working with FXML some properties start with a capital letter and others don't.
+                        Basically, a capital letter is used when we are defining a class and the ones that start with a
+                        lowercase are usually a property inside a class. So when referring to "tooltips" we have to
+                        assign it the same way that we assign our graphic property, since it expects something that's
+                        not in the Button class. -->
+                        <tooltip>
+                            <Tooltip text="Add a New ToDo Item."/>
+                        </tooltip>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@/toolbarButtonGraphics/general/New24.gif"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <!-- When the below ToogleButton is selected it will only show items with the deadline of today.
+                    A sort of filter. -->
+                    <ToggleButton fx:id="filterToggleButton" text="Today's Items" onAction="#handleFilterButton">
+                        <tooltip>
+                            <Tooltip text="Button Down: Show Today's items only. Button Up : Show all items."/>
+                        </tooltip>
+                    </ToggleButton>
+                </HBox>
+            </ToolBar>
+        </VBox>
+    </top>
+    <left>
+        <ListView fx:id="toDoListView" onKeyPressed="#handleKeyPressed"/>
+    </left>
+    <center>
+        <VBox style="-fx-background-color: white">
+            <TextArea fx:id="itemDetailsTextArea" VBox.vgrow="ALWAYS" wrapText="true"/>
+            <HBox>
+                <Label text="Due: " style="-fx-background-color: white">
+                    <font>
+                        <Font name="Times New Roman bold" size="20"/>
+                    </font>
+                </Label>
+                <Label fx:id="deadlineLabel" style="-fx-background-color: white">
+                    <font>
+                        <Font name="Times New Roman bold" size="20"/>
+                    </font>
+                </Label>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

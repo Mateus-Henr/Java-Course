@@ -1,0 +1,60 @@
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Accordion?>
+<GridPane fx:controller="tutorial.first.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <!-- Slider -->
+    <!-- It's used when we want the user to provide a numeric value though an interface. -->
+    <!-- Consists of a track and a thumb that the user can drag. -->
+    <!-- We use the "min" and "max" properties to specify a range. -->
+    <!-- "showTickLabels" and "showTickMarks" are used to give more information about the values. -->
+    <!-- The  property "minorTickCount" alters the quantity of ticks between major marks. -->
+    <!-- In order to the "selector" always be on a tick mark, we can use the "snapToTicks" property that brings the
+    "selector" to the closest tick mark. -->
+    <!-- You can display it vertically by setting its orientation property to vertical. -->
+    <Slider GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2" min="0" max="100"
+            showTickLabels="true" showTickMarks="true" minorTickCount="4" snapToTicks="true"/>
+
+    <!-- Spinner -->
+    <!-- The advantage of this control is that we can enter a more specific value since it shows number by number. -->
+    <!-- By using the "editable" property we can allow the user to enter a value in the box. -->
+    <!-- The user needs to press "Enter" to confirm the value if they don't it'll be set to the previous value. -->
+    <!-- However if the user types a number that is too large for the computer to manage it'll crash. -->
+    <!-- To set an initial value the property "initialValue" is used. -->
+    <Spinner GridPane.rowIndex="0" GridPane.columnIndex="2" min="0" max="100" editable="true" initialValue="50"/>
+
+    <!-- ColorPicker -->
+    <!-- A complete color picker with hexadecimal colors. It also saves the colors saved by you. -->
+    <!-- Resets every time you close the app. -->
+    <ColorPicker GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+
+    <!-- DatePicker -->
+    <!-- A complete date picker. It bases itself on the region's date format. -->
+    <DatePicker GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+    <!-- TitlePane -->
+    <!-- It's a pane with a title, although its name ends with a "pane" it's not a layout, it's a control. -->
+    <!-- It's a title that can be opened to see its content. -->
+    <!-- We can also add to it an accordion control, that is a group of tiled panes and only one pane is allowed to
+     open at a time. -->
+    <!-- There's no actual way offered by this interface to spin it to horizontal. -->
+    <!-- We can set one opened by default defining an id to it and setting it to the "expandedPane" property. -->
+    <Accordion GridPane.rowIndex="1" GridPane.columnIndex="2" GridPane.columnSpan="2" expandedPane="$tp3">
+        <panes>
+            <TitledPane text="Titled Pane">
+                <Label text="Label in titled pane"/>
+            </TitledPane>
+            <TitledPane text="Titled Pane 2">
+                <Label text="Label 2 in titled pane"/>
+            </TitledPane>
+            <TitledPane fx:id="tp3" text="Titled Pane 3">
+                <Label text="Label 3 in titled pane"/>
+            </TitledPane>
+        </panes>
+    </Accordion>
+</GridPane>
