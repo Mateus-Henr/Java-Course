@@ -25,7 +25,11 @@
             <artifactId>javafx-fxml</artifactId>
             <version>14.0.2.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>14.0.2.1</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -60,7 +64,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.javafxapplication/tutorial.HelloApplication
+                            <mainClass>com.example.javafxapplication/tutorial.first.HelloApplication
                             </mainClass>
                         </configuration>
                     </execution>
