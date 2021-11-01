@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- Any changes made in the Screen Builder will be made in this file. Sometimes there are some bugs though. -->
+<!-- When Screen Builder tries to load changes from this file that are invalid it's going to crash. -->
+<!-- We can see the current content on this file on the bottom left of the Screen Builder UI. By clicking on a item
+you can see properties that you can add/modify on the right side of the UI. Regarding the content of the pane that
+appears on the right side of the screen it's divided in three areas being them:
+> Properties - Don't affect other controls just the one your modifying.
+> Layout - Properties that affect the positioning of the controls.
+> Code - Where we assign "fx:id"s and associate event handlers.
+OBS: Even though controls don't have layout, we still have a tab for layout and there you can modify how the control
+behaves within its parent container. -->
+<!-- To associate a stylesheet to you layout you can select a container and there will have a place to reference your
+file. You can also add more than one stylesheet. Because of poor integration if you update a stylesheet associated to
+a control it won't update on the Screen Builder UI (in the standalone version it doesn't happen). -->
+
+<GridPane alignment="CENTER" stylesheets="@styles.css" vgap="10" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tutorial.HelloController">
+    <children>
+        <HBox spacing="5.0" GridPane.rowIndex="1">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleAction" style="-fx-text-fill: white;" text="Ok">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </Button>
+                <Button mnemonicParsing="false" text="Cancel" />
+                <Button mnemonicParsing="false" text="Help" />
+            </children>
+            <GridPane.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" />
+            </GridPane.margin>
+        </HBox>
+        <!-- Because the Label is at position 0.0 the Scene Builder doesn't generate the properties for it. -->
+        <Label fx:id="label" text="My Label" />
+    </children>
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+    </rowConstraints>
+</GridPane>

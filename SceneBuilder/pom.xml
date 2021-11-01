@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.scenebuilder/com.example.scenebuilder.HelloApplication</mainClass>
+                            <mainClass>com.example.scenebuilder/tutorial.HelloApplication</mainClass>
                         </configuration>
                     </execution>
                 </executions>

@@ -1,4 +1,4 @@
-package com.example.scenebuilder;
+package tutorial;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -40,3 +40,11 @@ public class HelloApplication extends Application
     }
 
 }
+
+// Using Screen Builder standalone version
+// To start just search for the app and open it.
+// You can use both at the same time (Screen Builder and Intellij), also any modifications that you make on some file
+// (i.e. CSS file) will be updated on the Screen Builder app.
+// You can also search things on the standalone version. It also gives you the possibility of defining a Controller.
+// In overall, it's better to work with Screen Builder outside Intellij, since any changes make in Intellij will be
+// automatically reflected on Screen Builder. So the project is in Intellij and the FXML is in Screen Builder.
