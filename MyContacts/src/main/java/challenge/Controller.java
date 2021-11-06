@@ -16,4 +16,9 @@ public class Controller
         tableView.setItems(contactData.getContacts());
     }
 
+    @FXML
+    public void showAddContactDialog()
+    {
+    }
+
 }
