@@ -8,7 +8,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
-<BorderPane fx:controller="challenge.Controller"
+<BorderPane fx:id="mainPanel" fx:controller="challenge.Controller"
             xmlns:fx="http://javafx.com/fxml">
     <top>
         <MenuBar>
@@ -16,6 +16,12 @@
                 <Menu text="Contacts">
                     <items>
                         <MenuItem text="New..." onAction="#showAddContactDialog"/>
+                    </items>
+                    <items>
+                        <MenuItem text="Edit..." onAction="#showEditContactDialog"/>
+                    </items>
+                    <items>
+                        <MenuItem text="Delete..." onAction="#deleteContact"/>
                     </items>
                 </Menu>
             </menus>
@@ -26,6 +32,11 @@
     Controller. -->
     <center>
         <TableView fx:id="tableView">
+            <!-- The "columnResizePolicy" property can be used to resize the table view in relation to the main window.
+            As it's being used here the table will resize itself occupying the entire main window. -->
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
             <columns>
                 <TableColumn text="First Name">
                     <cellValueFactory>

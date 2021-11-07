@@ -1,8 +1,7 @@
-package tutorial;
+package tutorial.first;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 // Lambdas are used to facilitate the usage of interfaces.
@@ -46,6 +45,7 @@ public class Main
         employees.add(jack);
         employees.add(snow);
 
+        // Without lambda
 //        Collections.sort(employees, new Comparator<Employee>()
 //        {
 //            @Override
@@ -55,6 +55,7 @@ public class Main
 //            }
 //        });
 
+        // With lambda
         Collections.sort(employees, (employee1, employee2) -> employee1.getName().compareTo(employee2.getName()));
 
         for (Employee employee : employees)

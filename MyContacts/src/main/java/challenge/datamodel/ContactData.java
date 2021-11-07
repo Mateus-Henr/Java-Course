@@ -36,12 +36,6 @@ public class ContactData
     {
         // *** initialize the contacts list here ***
         contacts = FXCollections.observableArrayList(); // Always use FX's versions when using JavaFX.
-        Contact contact = new Contact();
-        contact.setFirstName("Mateus");
-        contact.setLastName("Figueiredo");
-        contact.setPhoneNumber("31975804023");
-        contact.setNotes("Nothing here.");
-        addContact(contact);
     }
 
     // *** Add methods to add/delete/access contacts here ***
@@ -60,6 +54,7 @@ public class ContactData
         contacts.remove(contactToRemove);
     }
 
+    // EXPECTS VALID VALUES, if null values are present it'll crash.
     public void loadContacts()
     {
         try

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contacts>
+<contact>
+	<first_name>Mateus</first_name>
+	<last_name>Figueiredo</last_name>
+	<phone_number>31975804023</phone_number>
+	<notes>Nothing here.</notes>
+</contact>
+<contact>
+	<first_name>Tim</first_name>
+	<last_name>Buchalka</last_name>
+	<phone_number>12345</phone_number>
+	<notes>My Notes.</notes>
+</contact>
+</contacts>
