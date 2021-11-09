@@ -1,8 +1,10 @@
 package tutorial;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -87,7 +89,7 @@ public class Main
 
         // The "Predicate" and "Consumer" are more general interfaces, there are the most specific ones such as
         // "IntPredicate" and "LongConsumer", for example. By using these "specific" ones it helps readability.
-        System.out.println("\nTesting type predicates");
+        System.out.println("\nTesting Type Predicates");
         IntPredicate greaterThan15 = i -> i > 15;
         System.out.println(greaterThan15.test(10));
         int a = 20;
@@ -112,13 +114,67 @@ public class Main
         // This interface doesn't accept any parameters, it just supplies something with something else.
         // We could use it for testing, for example the supplier could instantiate objects and populate them
         // with random values.
+        System.out.println("\nDemonstrating Supplier Interface");
         Random random = new Random();
         Supplier<Integer> randomSupplier = () -> random.nextInt(1000);
         for (int i = 0; i < 10; i++)
         {
-            System.out.println(randomSupplier);
+            System.out.println(randomSupplier.get());
         }
 
+
+        System.out.println("\nGetting the Last Name of the Employees");
+        employees.forEach(employee ->
+        {
+            // Getting the first space in the name and assigning to the variable everything that comes after it.
+            String lastname = employee.getName().substring(employee.getName().indexOf(' ') + 1);
+            System.out.println("Last Name is:" + lastname);
+        });
+
+        // An interface represents a function when it takes parameter(s) and returns a value.
+        // When using the Function class we use Generics as well, the first type is the argument type and the second
+        // type is the return type.
+        // If the lambda has more than one line you're obliged to use curly braces and the "return" statement.
+        Function<Employee, String> getLastName = (Employee employee) ->
+        {
+            return employee.getName().substring(employee.getName().indexOf(' ') + 1);
+        };
+
+        // To get the last name of an employee we have to call the apply method and pass it to the employee object.
+        System.out.println("\nGetting the last name of an employee");
+        String lastName = getLastName.apply(employees.get(2));
+        System.out.println(lastName);
+
+        // Using functions we can pass code that accepts and return a value in the form of a lambda expression
+        // without having to create an interface and a class that implements the interface.
+        // As seen previously we can change what a method does based on the function that we pass in.
+        Function<Employee, String> getFirstName = (Employee employee) ->
+        {
+            return employee.getName().substring(0, employee.getName().indexOf(' '));
+        };
+
+        System.out.println("\nPrinting first name or last name randomly using function as parameter.");
+        Random random1 = new Random();
+        for (Employee employee : employees)
+        {
+            if (random1.nextBoolean())
+            {
+                System.out.println(getAName(getFirstName, employee));
+            }
+            else
+            {
+                System.out.println(getAName(getLastName, employee));
+            }
+        }
+
+        // Functions are used when we want to run similar code in different ways. Making the code more concise.
+    }
+
+    // Passing in a function as an argument.
+    private static String getAName(Function<Employee, String> getName, Employee employee)
+    {
+        // When using "Function" if you want to pass in arguments to the function you have to use the "apply" method.
+        return getName.apply(employee);
     }
 
     private static void printEmployeesByAge(List<Employee> employees, String ageText, Predicate<Employee> ageCondition)
@@ -136,3 +192,42 @@ public class Main
     }
 
 }
+
+// Code example
+// Another situation that functions are used is when we want to use callbacks (when a non-UI event occurs, threading is
+// an example).
+// In the code example below we are fetching data from a background thread and then resizing the received image.
+// Therefore, one thread receives the image from the other.
+//public interface ResizeImage
+//{
+//    public Image resizeImage(Image image);
+//
+//}
+//
+//public List<Image> runWhenDone() // Method that's executed when the background thread has images.
+//{
+//    // Pretend that we have access to an ImageResizer instance (probably provided when a Runnable object was
+//    // constructed), and to a list called images that has all the images fetched from the Internet.
+//
+//    for (Image image : images)
+//    {
+//        resizedImages.add(resizer.resizeImage(image));
+//    }
+//}
+
+// Code using functions (avoiding the usage of interface)
+// As said before, when using functions + lambda we can avoid the usage of interfaces and classes than implement that.
+// Function<Image, Image> resizer1 = (Image image) -> { resize using algorithm 1}
+// Function<Image, Image> resizer2 = (Image image) -> { resize using algorithm 2}
+//
+//public List<Image> runWhenDone()
+//{
+//    for (Image image : images)
+//    {
+//        resizedImages.add(resizer.apply(image));
+//    }
+//}
+// SUMMING UP: When you want to modify an object in some way and there are several different ways for modifying that
+// object (depending on as specific thing of the object), so functions can be used to keep the code neater.
+// All we would need to do is to write a method that can manipulate the object based on the function that it has
+// received as parameter.
