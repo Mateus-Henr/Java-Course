@@ -1,4 +1,4 @@
-package tutorial;
+package tutorial.first;
 
 public class Main
 {
@@ -53,6 +53,8 @@ public class Main
         // Replacing letters if followed by a pattern, in the case below it's a case of permutation, so it looks for
         // 3! * 2! = 12 possibilities.
         System.out.println(alphaNumeric.replaceAll("[aei][Fg]", "X"));
+        // Searching for a specific word with a letter in upper or lower case.
+        System.out.println("harry".replaceAll("[Hh]arry", "Harry"));
     }
 
     // IntelliJ has got a feature that we can test regular expressions, it can be accessed by placing yhe cursor
