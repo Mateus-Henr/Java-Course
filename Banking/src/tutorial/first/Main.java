@@ -1,4 +1,4 @@
-package tutorial;
+package tutorial.first;
 
 public class Main
 {
