@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 public class BankAccountTest
 {
     private BankAccount account;
+    private static int count;
 
     // If we want to run a method only once before all the tests we can use the  "@org.junit.BeforeClass" annotation.
     // For the other scenarios, cleanup code, we can use the  "@org.junit.AfterClass" annotation.
@@ -23,14 +24,14 @@ public class BankAccountTest
     @org.junit.BeforeClass
     public static void beforeClass()
     {
-        System.out.println("This executes before any test cases");
+        System.out.println("This executes before any test cases. Count = " + count++);
     }
 
     // This annotation tells the JUnit framework to run this method every time we run a test.
     @org.junit.Before
     public void setup()
     {
-        // Creating a new Bank account instance for the tests.
+        // Creating a new Bank account instance for the tests in just one place.
         account = new BankAccount("Tim", "Buchalka", 1000.00, BankAccount.CHECKING);
         System.out.println("Running a test");
     }
@@ -43,9 +44,37 @@ public class BankAccountTest
     }
 
     @org.junit.Test
-    public void withdraw()
+    public void withdraw_branch()
     {
-        fail("This test has yet to be implemented.");
+        double balance = account.withdraw(600.00, true);
+        assertEquals(400.00, balance, 0);
+    }
+
+    // In scenarios that we expect an exception to be thrown we have to make a change to the annotation, as shown below.
+    // And if we are expecting an exception and the exception really happens, the test will pass.
+    @org.junit.Test(expected = IllegalArgumentException.class)
+    public void withdraw_notBranch()
+    {
+        account.withdraw(600.00, false);
+        fail("Should have thrown an IllegalArgumentException");
+        // As we are expecting an exception to be thrown we can remove the "assertEquals" method.
+//        assertEquals(400.00, balance, 0);
+    }
+
+    // When working with earlier version of JUnit the above method code would be:
+    @org.junit.Test
+    public void withdraw_notBranchOldJUnit()
+    {
+        try
+        {
+            account.withdraw(600.00, false);
+            // The fail is here to make sure that the exception is going to be thrown.
+            fail("Should have thrown an IllegalArgumentException");
+        }
+        catch (IllegalArgumentException e)
+        {
+
+        }
     }
 
     @org.junit.Test
@@ -71,7 +100,13 @@ public class BankAccountTest
     @org.junit.AfterClass
     public static void afterClass()
     {
-        System.out.println("This executes after any test cases");
+        System.out.println("This executes after any test cases. Count = " + count++);
+    }
+
+    @org.junit.After // This will execute after every test, similarly to the "@Before" annotation.
+    public void teardown()
+    {
+        System.out.println("Count = " + count++);
     }
 
 }

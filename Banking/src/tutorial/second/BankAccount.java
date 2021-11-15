@@ -31,6 +31,11 @@ public class BankAccount
     // It's false if the customer is performing the transaction at an ATM.
     public double withdraw(double amount, boolean branch)
     {
+        // Supposing that the bank just allows the customer to take up to $500 if not in a branch.
+        if ((amount > 500) && !branch)
+        {
+            throw new IllegalArgumentException();
+        }
         balance -= amount;
         return balance;
     }
