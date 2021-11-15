@@ -1,4 +1,4 @@
-package tutorial;
+package tutorial.first;
 
 
 // When debugging a socket is opened because the debugger attaches to the app and communicates to the app using that
@@ -58,3 +58,15 @@ public class Main
 // app. Can be useful if your app has some sort of cleanup method, database connection, network interaction that is
 // necessary to end properly, it runs to its completion.
 // View Breakpoints = To view all your breakpoints.
+
+// Watchers (variables with a glasses icon)
+// They are a feature of IntelliJ debugger, they appear on the Variables Pane and are updated as the app runs.
+// It's a convenient way to see variables, when working with many variables we can set them as watches.
+// When it's in blue it means that it has been updated.
+// You can open the watches panel by clicking on "Show Watches" and it'll show watches added by you.
+// A Field Watchpoint is a type of breakpoint, which is different from watches, it's used when we want to monitor
+// what's altering the variable, so whenever the value of the variable is updated or accessed the app is suspended.
+// You can set a Field Watchpoint by clicking "Alt" + left-click on the side of the code.
+// Also, by using the right-click on the field watchpoint you can configure it, like setting conditions, defining when
+// it should stop, etc.
+// You can use "Remove Once Hit" to only stop the program execution once.
