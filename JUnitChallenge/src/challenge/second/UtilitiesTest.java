@@ -13,7 +13,7 @@ public class UtilitiesTest
     }
 
     @org.junit.Test
-    public void removePairs_first()
+    public void removePairs_oddLength()
     {
         Utilities utilities = new Utilities();
         String source = "AABCDDEFF";
@@ -22,7 +22,7 @@ public class UtilitiesTest
     }
 
     @org.junit.Test
-    public void removePairs_second()
+    public void removePairs_evenLength()
     {
         Utilities utilities = new Utilities();
         String source = "ABCCABDEEF";
