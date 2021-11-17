@@ -4,20 +4,28 @@ SQL is a database language used to communicate with databases.
 Database Terminology
 Database: The container for all the data that you store. In sqlite, the entire database is stored in a single file.
 Database Dictionary: Describes all the tables and fields within the database.
-Table: A collection of related data held in the database. A "contact" table would store for example, name, address and phone number.
+Table: A collection of related data held in the database. A "contact" table would store for example, name, address and
+phone number.
 Field: The basic unit of data in a table, we could consider it as a List that stores values. They have types of data.
 Column: It's another name for field.
-Row (or record): A single set of data containing all the columns in the table (a collection of all the columns of one entry in the table).
+Row (or record): A single set of data containing all the columns in the table (a collection of all the columns of one
+entry in the table).
 Flat File databases: Store all data in a single table and by doing it, it results in a lot of duplication.
 A join (relational databases): When we have two tables with the same field can be one-to-many.
-Linking table: Used to link two tables that relations two tables. In case of data change we would need to change here as well.
-Database normalization: When we split the data, for example customer information x customer purchases. It helps to remove redundancy.
-View: It's a way to look at the data in a format similar to a table, bringing data together from more than one joined table.
+Linking table: Used to link two tables that relations two tables. In case of data change we would need to change here
+as well.
+Database normalization: When we split the data, for example customer information x customer purchases. It helps to
+remove redundancy.
+View: It's a way to look at the data in a format similar to a table, bringing data together from more than one joined
+table.
 A view can't be updated, you can't add a new row there and create the data in the relevant tables.
 
 Installing SQLite
-Go to the link "https://www.sqlite.org/index.html" and click on "Download", go to "Precompiled Binaries for Windows" and install the one that says "A bundle of command-line tools ....". However, the file is already installed in the "bin" folder.
-Then go to "Environment Variables..." and in "User Variables" click to edit the "PATH" variable and add a new variable that's going to be the location of the files of the database.
+Go to the link "https://www.sqlite.org/index.html" and click on "Download", go to "Precompiled Binaries for Windows"
+and install the one that says "A bundle of command-line tools ....". However, the file is already installed in the
+"bin" folder.
+Then go to "Environment Variables..." and in "User Variables" click to edit the "PATH" variable and add a new variable
+that's going to be the location of the files of the database.
 Then you can verify if it's working by typing "sqlite3" in the cmd.
 
 Specifying the database name
@@ -32,13 +40,15 @@ Showing the tables
 Displaying the structure of your tables
 	.schema
 
-Displaying the entire schema as well as the command necessary to populate the table with the data that it currently contains
+Displaying the entire schema as well as the command necessary to populate the table with the data that it currently
+contains
 	.dump
 
 Exiting the SQLite shell
 	.exit
 
-OBS: The ";" is necessary to finish SQL statements, if you press enter without the semicolon, SQLite will expect another part of the statement. (Useful to organize big statements).
+OBS: The ";" is necessary to finish SQL statements, if you press enter without the semicolon, SQLite will expect
+another part of the statement. (Useful to organize big statements).
 
 Creating a table
 	create table contacts (name text, phone integer, email text);
@@ -56,12 +66,15 @@ Getting only the email addresses
 
 Another way of adding records
 	INSERT INTO contacts VALUES('Brian', 1234, 'brian@myemail.com');
-OBS: This way we are providing values for all the fields in the order that they are found in the table, and because of that, we don't have to specify the fields. If we don't know all the values to provide, we can't use this format.
+OBS: This way we are providing values for all the fields in the order that they are found in the table, and because of
+that, we don't have to specify the fields. If we don't know all the values to provide, we can't use this format.
 
 Creating a record without all the column values
 	INSERT INTO contacts(name, phone) VALUES('Steve', 87654);
 
-Even though we specify types for the fields SQLite doesn't have types for its fields, it's used because SQLite implements standard SQL that it uses this format. Knowing that, you actually can put any type of data in a column. Example below:
+Even though we specify types for the fields SQLite doesn't have types for its fields, it's used because SQLite
+implements standard SQL that it uses this format. Knowing that, you actually can put any type of data in a column.
+Example below:
 	INSERT INTO contacts VALUES('Avril', '+61 (0)87654321', 'avril@email.com.au');
 Which can be quite tricky to handle as a programmer.
 
@@ -70,7 +83,8 @@ Making a backup of our table
 
 Updating a specific record
 	UPDATE contacts SET email='steve@hisemail.com' WHERE name='Steve';
-OBS: You have to tell WHICH row to update otherwise it's going to update every row on the table, you can tell which row to update by using the "WHERE" command. SO USE CAREFULLY THE UPDATE COMMAND SINCE IT CAN FUCK EVERYTHING UP.
+OBS: You have to tell WHICH row to update otherwise it's going to update every row on the table, you can tell which row
+to update by using the "WHERE" command. SO USE CAREFULLY THE UPDATE COMMAND SINCE IT CAN FUCK EVERYTHING UP.
 
 Retoring a backup
 	.restore testbackup
@@ -90,35 +104,42 @@ Mini Challenge
 	.schema
 
 ID for records
-They are used to identify the records (that's why they are unique), as a good habit we should use "_id" when naming this column, since when working with Java this is the name that some classes use to represent ID. 
+They are used to identify the records (that's why they are unique), as a good habit we should use "_id" when naming
+this column, since when working with Java this is the name that some classes use to represent ID.
 
 Mini Challenge
 	SELECT name FROM albums WHERE _id=367;
 
 Primary Key
 A key in a table is an index, which provides way to search something a lot faster.
-In relational databases the ordering of the rows is undefined. They follow the idea of Sets in Java, like by defining a key is much faster to find a specific record, just like those Java data structures do.
+In relational databases the ordering of the rows is undefined. They follow the idea of Sets in Java, like by defining a
+ key is much faster to find a specific record, just like those Java data structures do.
 Must be unique. (normally, the ID column that takes this responsibility.)
 Keys don't need to be unique, but primary keys must be.
 They are automatically NOT NULL.
 
 NOT NULL
-You can create columns as NOT NULL to make sure that the user is going to enter a value for that column, otherwise he or she will get an error.
+You can create columns as NOT NULL to make sure that the user is going to enter a value for that column, otherwise he
+or she will get an error.
 OBS: Sometimes a NULL value makes sense, for example a middle name, ect.
 
 Inserting a new artist into the table
 	INSERT INTO artists (name) VALUES('Beyonce');
-OBS: As we are not providing an ID, we must specify the name column, so SQLite knows which column we want to have this value. And as we didn't provide an ID, SQLite will automatically provide an ID to the record. (But it varies from database to database.)
+OBS: As we are not providing an ID, we must specify the name column, so SQLite knows which column we want to have this
+value. And as we didn't provide an ID, SQLite will automatically provide an ID to the record.
+(But it varies from database to database.)
 More about this autoincrement ID at: https://www.sqlite.org/autoinc.html
 
 
 Ordering of data
-By default, the order of the data displayed on a database is based on its primary key value (ascending order). Without a primary key the order is undefined.
+By default, the order of the data displayed on a database is based on its primary key value (ascending order). Without
+a primary key the order is undefined.
 
 Specifying an order
 	SELECT * FROM artists ORDER BY name;
 	SELECT * FROM albums ORDER BY name;
-OBS: The case matter when ordering data, lowercase values will be displayed at the bottom. To ignore that you can use the following SQL statement:
+OBS: The case matter when ordering data, lowercase values will be displayed at the bottom. To ignore that you can use
+the following SQL statement:
 	SELECT * FROM albums ORDER BY name COLLATE NOCASE;
 
 Specifying on descending order
@@ -131,17 +152,126 @@ Mini Challenge
 	SELECT * FROM songs ORDER BY album, track COLLATE NOCASE;
 
 SQL JOIN clause (relating tables together)
-This clause is used to join tables together. Keeping data "normalised" so that tables only contain information that relates to a single thing (song, album or artist in our example) is a fundamental part of relational databases and by doing that and then joining the tables back together you get a great deal of flexibility in how you can query and manipulate the data.
-Remember that the songs table contains a column holding the album ID, and the album table has an artist ID field. These are used to provide a link between the tables.
+This clause is used to join tables together. Keeping data "normalised" so that tables only contain information that
+relates to a single thing (song, album or artist in our example) is a fundamental part of relational databases and by
+doing that and then joining the tables back together you get a great deal of flexibility in how you can query and
+manipulate the data.
+Remember that the songs table contains a column holding the album ID, and the album table has an artist ID field.
+These are used to provide a link between the tables.
 
 	SELECT songs.track, songs.title, albums.name FROM songs INNER JOIN albums ON songs.album = albums._id;
 
-First we've specified which tables the columns are in when selecting them. For good practise's sake, always prefix the fields with the table name. (even though we can use without it if there's no ambiguity.)
-Then we are using "INNER JOIN" and telling SQLite which colums are involved in the JOIN, which is what the "ON" part does. In the above example it says to relate the rows in songs to those in albums with the song's table album's column equals the album tables ID column.
+First we've specified which tables the columns are in when selecting them. For good practise's sake, always prefix the
+fields with the table name. (even though we can use without it if there's no ambiguity.)
+Then we are using "INNER JOIN" and telling SQLite which columns are involved in the JOIN, which is what the "ON" part
+does. In the above example it says to relate the rows in songs to those in albums with the song's table album's column
+equals the album tables ID column.
 
 Inner join
 	SELECT songs.track, songs.title, albums.name FROM songs INNER JOIN albums ON songs.album = albums._id;
 OBS: Not all database systems will allow you to omit the word "INNER", so always use it.
 
 Sorting the data
-	SELECT songs.track, songs.title, albums.name FROM songs INNER JOIN albums ON songs.album = albums._id ORDER BY albums.name, songs.track;
+	SELECT songs.track, songs.title, albums.name FROM songs INNER JOIN albums ON songs.album = albums._id
+	ORDER BY albums.name, songs.track;
+
+Mini Challenge
+    SELECT artists.name, albums.name FROM albums INNER JOIN artists ON albums.artist = artists._id
+    ORDER BY artists.name COLLATE NOCASE;
+
+Indirectly JOIN (Multiple INNER JOINs)
+    SELECT artists.name, albums.name, songs.track, songs.title FROM songs
+    INNER JOIN albums ON songs.album = albums._id
+    INNER JOIN artists ON albums.artist = artists._id
+    ORDER BY artists.name, albums.name, songs.track;
+Songs INNER JOIN albums INNER JOIN artists.
+OBS: The order of the clauses are important, for example the "WHERE" clause must go before the "ORDER BY" clause.
+    SELECT artists.name, albums.name, songs.track, songs.title FROM songs
+    INNER JOIN albums ON songs.album = albums._id
+    INNER JOIN artists ON albums.artist = artists._id
+    WHERE albums.name = "Doolittle"
+    ORDER BY artists.name, albums.name, songs.track;
+
+Summarizing things
+When using "SELECT" you specify what columns you interested in, you JOIN any other tables that are needed, filter the
+selection using a "WHERE" clause, and then you ORDER the results.
+When you not sure of what you want to find to can use wildcards to help to match a  particular string.
+
+Using Wild Cards
+    SELECT artists.name, albums.name, songs.track, songs.title FROM songs
+    INNER JOIN albums ON songs.album = albums._id
+    INNER JOIN artists ON albums.artist = artists._id
+    WHERE songs.title LIKE '%doctor%'
+    ORDER BY artists.name, albums.name, songs.track;
+
+The "LIKE" clause
+    Instead of using "=" since we don't know the exact name of the album we need to use "LIKE".
+    It's not case-sensitive.
+
+The "%"
+It's used in SQLite to find strings that have the content of what's within the percentage signs. It matches 0 or more
+characters. (Very similar to the "*" in Regular Expressions.)
+Also, if you are using a percentage sign at the end of the word it will only match values that start with the content
+that you've inserted (but the end will be used to match other strings). And the same process applies to when using it
+at the beginning of a word.
+
+    SELECT artists.name, albums.name, songs.track, songs.title FROM songs
+    INNER JOIN albums ON songs.album = albums._id
+    INNER JOIN artists ON albums.artist = artists._id
+    WHERE artists.name LIKE '%jefferson%'
+    ORDER BY artists.name, albums.name, songs.track;
+
+The "_"
+It can be used to match a single character.
+
+Store Procedures
+Other databases (not SQLite) provide this resource, it's basically the ability of save SQL statements as some sort of
+method/function to use later.
+
+View
+Can be seen as a virtual table, that's unmodifiable. It's a convenient way to look up data, to increase security (if we
+want to hide any data) and to organize data for displaying later.
+
+Creating a view
+    CREATE VIEW artist_list AS
+    SELECT artists.name, albums.name, songs.track, songs.title FROM songs
+    INNER JOIN albums ON songs.album = albums._id
+    INNER JOIN artists ON albums.artist = artists._id
+    ORDER BY artists.name, albums.name, songs.track;
+OBS: The column names for the views will be based on the fields from the tables that you're getting data from. If there
+are two names that are equals, SQLite will add a ":" + number, to differentiate the columns. So it's always a good
+idea to name the columns of the view that you're going to create.
+
+Using the view
+    SELECT * FROM artist_list;
+
+Filtering a view
+    SELECT * FROM artist_list WHERE name LIKE 'jefferson%';
+
+Ordered view
+    CREATE VIEW album_list AS
+    SELECT name FROM albums
+    ORDER BY name
+    COLLATE NOCASE;
+
+Accessing the ordered view
+    SELECT * FROM album_list;
+
+Deleting a view
+    DROP VIEW album_list;
+OBS: As views aren't actually table (they just simulate the data), by deleting them you would be deleting data, as you
+would if you were deleting a table.
+
+Creating the view with column names specified by us
+    CREATE VIEW artist_list AS
+    SELECT artists.name AS artist, albums.name AS album, songs.track, songs.title FROM songs
+    INNER JOIN albums ON songs.album = albums._id
+    INNER JOIN artists ON albums.artist = artists._id
+    ORDER BY artists.name, albums.name, songs.track;
+
+Greater to = ">"
+Smaller to = "<"
+Not equal to = "<>"
+
+
+Challenge
