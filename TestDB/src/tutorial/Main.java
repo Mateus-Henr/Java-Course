@@ -1,9 +1,6 @@
 package tutorial;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Main
 {
@@ -18,13 +15,63 @@ public class Main
             // Setting up the place where the db file will be.
 //            Class.forName("org.sql.JDBC"); // This needs to be used for older versions of JDBC.
             Connection conn = DriverManager.getConnection("jdbc:sqlite:F:\\JavaCourse\\TestDB\\testjava.db");
+            // Depending on the database that you using you've got to commit the changes, with SQLite it happens as soon
+            // as we "execute" the statement.
+            // The default behaviour of Connection objects is to auto commit any changes
+//            conn.setAutoCommit(false);
 
             // Statement Objects
             // They are used when we want to make SQL statements and execute them on the database.
             // Creating a statement instance by calling the Connection method. So the statement can only be run against
             // a database that we connect to.
             Statement statement = conn.createStatement();
-            statement.execute("CREATE TABLE contacts (name TEXT, phone INTEGER, email TEXT)");
+            // Using the "IF NOT EXISTS" to create the table only if it doesn't exist.
+            statement.execute("CREATE TABLE IF NOT EXISTS contacts (name TEXT, phone INTEGER, email TEXT)");
+
+            // CREATE
+//            statement.execute("INSERT INTO contacts (name, phone, email)" +
+//                                      "VALUES('Joe', 4567, 'joe@anywhere.com')");
+//            statement.execute("INSERT INTO contacts (name, phone, email)" +
+//                                      "VALUES('Jane', 546565, 'jane@somewhere.com')");
+//            statement.execute("INSERT INTO contacts (name, phone, email)" +
+//                                      "VALUES('Fido', 65763, 'dog@anywhere.com')");
+
+            // UPDATE and DELETE
+            // Always remember the "WHERE" clause with "UPDATE" and "DELETE", otherwise all of your data will be
+            // modified.
+//            statement.execute("UPDATE contacts SET phone=5566789 WHERE name='Jane'");
+//            statement.execute("DELETE FROM contacts WHERE name='Joe'");
+
+            // The "execute()" method returns a boolean that will be true if the statement that we are executing
+            // returns an instance of the "ResultSet" class and false if it returns no results. It also returns false
+            // if we are using an "UPDATE" statement and this statement usually returns the number of records that
+            // have been updated.
+            // When querying the database (using "SELECT"), it returns the records that match the query as a "ResultSet"
+            // instance, and we can get these results by calling the ".getResultSet()" method.
+            statement.execute("SELECT * FROM contacts");
+            ResultSet results = statement.getResultSet();
+
+            // Every Statement object has a cursor.
+            // If you reuse a statement object to do a query, then any ResultSet associated with that Statement object
+            // is closed and a new one is created for the new query. So if we want to work with multiple queries at the
+            // same time, it's imperative to use a different Statement instance for each query. It's only okay to use
+            // the same instance when we are doing "UPDATE", "DELETE" or "CREATE", since we weren't checking the
+            // results.
+            // We can only use the same Statement object if we wait for it to finish a query to execute another, since
+            // they can only have one ResultSet associate with it.
+            // When a ResultSet is created its cursor is placed before the first record and the first time we call
+            // "results.next()" the cursor will be moved to the first record, and it goes on (until it returns false).
+            // And the "get()" methods are values returned from where the cursor currently is.
+            while (results.next())
+            {
+                // Calling specific "get" methods based on the type of data.
+                System.out.println(results.getString("name") + " " +
+                                           results.getInt("phone") + " " +
+                                           results.getString("email"));
+            }
+
+            // We have to close it before we close the Statement instance since it's associated to that.
+            results.close();
 
             // It's important to close the resources after using them, since apps have a limited number of resources.
             // We could also have used "try-with-resources" for this. If using it you would need to put within the
