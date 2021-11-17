@@ -1,0 +1,48 @@
+Challenge
+    1 - SELECT songs.title FROM songs
+        INNER JOIN albums ON songs.album = albums._id
+        WHERE albums.name = 'Forbidden';
+
+    2 - SELECT songs.track, songs.title FROM songs
+        INNER JOIN albums ON songs.album = albums._id
+        WHERE albums.name = 'Forbidden'
+        ORDER BY songs.track;
+
+    3 - SELECT songs.title FROM songs
+        INNER JOIN albums ON songs.album = albums._id
+        INNER JOIN artists ON albums.artist = artists._id
+        WHERE artists.name = 'Deep Purple';
+
+    4 - UPDATE artists SET name='One Kitten' WHERE name='Mehitabel';
+
+    5 - SELECT * FROM artists WHERE name='Mehitabel';
+        SELECT * FROM artists WHERE name='One Kitten';
+
+    6 - SELECT songs.title FROM songs
+        INNER JOIN albums ON songs.album = albums._id
+        INNER JOIN artists ON albums.artist = artists._id
+        WHERE artists.name = 'Aerosmith'
+        ORDER BY songs.title
+        COLLATE NOCASE;
+
+    7 - SELECT COUNT(songs.title) FROM songs
+        INNER JOIN albums ON songs.album = albums._id
+        INNER JOIN artists ON albums.artist = artists._id
+        WHERE artists.name = 'Aerosmith';
+
+    8 - SELECT DISTINCT songs.title FROM songs
+        INNER JOIN albums ON songs.album = albums._id
+        INNER JOIN artists ON albums.artist = artists._id
+        WHERE artists.name = 'Aerosmith'
+        ORDER BY songs.title
+        COLLATE NOCASE;
+
+    9 - SELECT COUNT(DISTINCT songs.title) FROM songs
+        INNER JOIN albums ON songs.album = albums._id
+        INNER JOIN artists ON albums.artist = artists._id
+        WHERE artists.name = 'Aerosmith';
+
+    10 - SELECT COUNT(DISTINCT artists.name), COUNT(DISTINCT albums.name) FROM songs
+         INNER JOIN albums ON songs.album = albums._id
+         INNER JOIN artists ON albums.artist = artists._id
+         WHERE artists.name = 'Aerosmith';
