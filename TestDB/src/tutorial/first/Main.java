@@ -1,4 +1,4 @@
-package tutorial;
+package tutorial.first;
 
 import java.sql.*;
 
