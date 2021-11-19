@@ -94,6 +94,10 @@ public class Main
                                        ", Track = " + songArtist.getTrack());
         }
 
+//        dataSource.insertSong("Touch of Grey", "Grateful Dead", "In The Dark", 1);
+//        dataSource.insertSong("Like A Rolling Stone", "Bob Dylan", "Bob Dylan's Greatest Hits", 5);
+        dataSource.insertSong("Bird Dog", "Everly Brothers", "All-Time Greatest Hits", 7);
+
         dataSource.close();
     }
 
