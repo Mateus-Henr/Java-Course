@@ -123,4 +123,11 @@ public class Main
     // Using PreparedStatement we would have:
     // SELECT name, album, track FROM artist_list WHERE title = "GO Your Own Way or 1=1 or" (the quotes would still be
     // there, but they would be interpreted as part of the SQL statement)
+
+    // OR in PreparedStatements
+    // SELECT name, album, track FROM artist_list WHERE title = ? OR artist = ?
+    // For each value we need a placeholder, we can't substitute more than one value for one placeholder, and we can't
+    // inject SQL, and we can ONLY substitute values we can't use placeholders for tables and column names, this happens
+    // because the statement needs to be precompiled to then pass the literal values. So the only info that we can
+    // postpone when performing queries are the values themselves.
 }

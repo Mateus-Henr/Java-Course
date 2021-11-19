@@ -1,4 +1,4 @@
-package tutorial.fourth.model;
+package tutorial.fifth.model;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -90,19 +90,25 @@ public class DataSource
                     " FROM " + TABLE_ARTIST_SONG_VIEW +
                     " WHERE " + COLUMN_SONG_TITLE + " = \"";
 
-    // SELECT name, album, track FROM artist_list WHERE title = ?
-    // Using a question mark for the song title, that's actually a placeholder character that we use in
-    // PreparedStatements.
-    // When replacing a placeholder in a PreparedStatement the database understands that a String is one value
-    // (i.e. "Going Your Own Way"). So we only substitute one value for one placeholder.
-    // And it only needs to be precompiled once, so we need to create an instance only once. If trying to create a new
-    // instance everytime when performing a query we would lose performance.
     public static final String QUERY_VIEW_SONG_INFO_PREP =
             "SELECT " + COLUMN_ARTIST_NAME + ", " + COLUMN_SONG_ALBUM + ", " + COLUMN_SONG_TRACK +
                     " FROM " + TABLE_ARTIST_SONG_VIEW +
                     " WHERE " + COLUMN_SONG_TITLE + " = ?";
 
+    public static final String INSERT_ARTIST =
+            "INSERT INTO " + TABLE_ARTISTS +
+                    '(' + COLUMN_ARTIST_NAME + ") VALUES(?)";
+
+    public static final String INSERT_ALBUMS = "INSERT INTO " + TABLE_ALBUMS +
+            '(' + COLUMN_ALBUM_NAME + ", " + COLUMN_ALBUM_ARTIST + ") VALUES(?, ?)";
+
+    public static final String INSERT_SONGS = "INSERT INTO " + TABLE_SONGS +
+            '(' + COLUMN_SONG_TRACK + ", " + COLUMN_SONG_TITLE + ", " + COLUMN_SONG_ALBUM + ") VALUES(?, ?, ?)";
+
     private PreparedStatement querySongInfoView;
+    private PreparedStatement insertIntoArtists;
+    private PreparedStatement insertIntoAlbums;
+    private PreparedStatement insertIntoSongs;
 
     private Connection conn;
 
@@ -111,8 +117,13 @@ public class DataSource
         try
         {
             conn = DriverManager.getConnection(CONNECTION_STRING);
-            // Initializing our PreparedStatement instance.
             querySongInfoView = conn.prepareStatement(QUERY_VIEW_SONG_INFO_PREP);
+            // Using the second argument to be able to get the key from the statement.
+            insertIntoArtists = conn.prepareStatement(INSERT_ARTIST, Statement.RETURN_GENERATED_KEYS);
+            insertIntoAlbums = conn.prepareStatement(INSERT_ALBUMS, Statement.RETURN_GENERATED_KEYS);
+            // As we don't have to pass the song key to anything else, we don't have to return a key.
+            insertIntoSongs = conn.prepareStatement(INSERT_SONGS);
+
             return true;
 
         }
@@ -127,14 +138,24 @@ public class DataSource
     {
         try
         {
-            // If we use a Statement ot do more than one query, which is common when using PreparedStatement,
-            // each time we need to do a new query the existing ResultSet is closed and a new one is created.
-            // So we don't have to worry about closing the ResultSet when using PreparedStatement, when we close
-            // the PreparedStatement whichever ResultSet is active would also be closed.
-            // And as it's an instance, we are going to close it in here. And the order is important.
             if (querySongInfoView != null)
             {
                 querySongInfoView.close();
+            }
+
+            if (insertIntoArtists != null)
+            {
+                insertIntoArtists.close();
+            }
+
+            if (insertIntoAlbums != null)
+            {
+                insertIntoAlbums.close();
+            }
+
+            if (insertIntoSongs != null)
+            {
+                insertIntoSongs.close();
             }
 
             if (conn != null)
@@ -332,12 +353,8 @@ public class DataSource
 
     public List<SongArtist> querySongInfoView(String title)
     {
-        // Using PreparedStatement (it's worthy mentioning that this class is a subclass of Statement, that's why
-        // we can use all the methods that the Statement class provides.)
         try
         {
-            // Using the "setString" method to specify the position of the placeholder to set the user string.
-            // For JDBC position is 1 based.
             querySongInfoView.setString(1, title);
             ResultSet results = querySongInfoView.executeQuery();
 
@@ -362,10 +379,3 @@ public class DataSource
     }
 
 }
-// Summing up how to use PreparedStatements
-// 1 - Declare a constant for the SQL statement that contains the placeholders.
-// 2 - Create a PreparedStatement instance using Connection.prepareStatement(sqlStmtString).
-// 3 - When we're ready to perform the query (or the insert, update, delete), we call the appropriate setter methods to
-// set the placeholders to the values we want to use in the statement.
-// 4 - We run the statement using PreparedStatement.execute() or PreparedStatement.executeQuery().
-// 5 - We process the results the same way we do when using a regular old
