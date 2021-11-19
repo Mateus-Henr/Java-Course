@@ -1,4 +1,6 @@
-package tutorial.third.model;
+package tutorial.fourth.model;
+
+import org.sqlite.JDBC;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -44,8 +46,6 @@ public class DataSource
                     " ON " + TABLE_ALBUMS + '.' + COLUMN_ALBUM_ARTIST +
                     " = " + TABLE_ARTISTS + '.' + COLUMN_ARTIST_ID +
                     " WHERE " + TABLE_ARTISTS + '.' + COLUMN_ARTIST_NAME + " = \"";
-    // USE DOUBLE QUOTES, since english uses single quotes for abbreviations, they can't be used, otherwise errors
-    // might appear.
 
     public static final String QUERY_ALBUMS_BY_ARTIST_SORT =
             " ORDER BY " + TABLE_ALBUMS + '.' + COLUMN_ALBUM_NAME +
@@ -69,12 +69,6 @@ public class DataSource
             " ORDER BY " + TABLE_ARTISTS + '.' + COLUMN_ARTIST_NAME + ", " + TABLE_ALBUMS + '.' + COLUMN_ALBUM_NAME +
                     " COLLATE NOCASE ";
 
-    //    CREATE VIEW IF NOT EXISTS artist_list AS
-    //    SELECT artists.name, albums.name, songs.track, songs.title FROM songs
-    //    INNER JOIN albums ON songs.album = albums._id
-    //    INNER JOIN artists ON albums.artist = artists._id
-    //    ORDER BY artists.name, albums.name, songs.track;
-
     public static final String TABLE_ARTIST_SONG_VIEW = "artist_list";
 
     public static final String CREATE_ARTIST_FOR_SONG_VIEW =
@@ -94,8 +88,23 @@ public class DataSource
                     TABLE_SONGS + "." + COLUMN_SONG_TRACK;
 
     public static final String QUERY_VIEW_SONG_INFO =
-            "SELECT " + COLUMN_ARTIST_NAME + ", " + COLUMN_SONG_ALBUM + ", " + COLUMN_SONG_TRACK + " FROM " + TABLE_ARTIST_SONG_VIEW +
+            "SELECT " + COLUMN_ARTIST_NAME + ", " + COLUMN_SONG_ALBUM + ", " + COLUMN_SONG_TRACK +
+                    " FROM " + TABLE_ARTIST_SONG_VIEW +
                     " WHERE " + COLUMN_SONG_TITLE + " = \"";
+
+    // SELECT name, album, track FROM artist_list WHERE title = ?
+    // Using a question mark for the song title, that's actually a placeholder character that we use in
+    // PreparedStatements.
+    // When replacing a placeholder in a PreparedStatement the database understands that a String is one value
+    // (i.e. "Going Your Own Way"). So we only substitute one value for one placeholder.
+    // And it only needs to be precompiled once, so we need to create an instance only once. If trying to create a new
+    // instance everytime when performing a query we would lose performance.
+    public static final String QUERY_VIEW_SONG_INFO_PREP =
+            "SELECT " + COLUMN_ARTIST_NAME + ", " + COLUMN_SONG_ALBUM + ", " + COLUMN_SONG_TRACK +
+                    " FROM " + TABLE_ARTIST_SONG_VIEW +
+                    " WHERE " + COLUMN_SONG_TITLE + " = ?";
+
+    private PreparedStatement querySongInfoView;
 
     private Connection conn;
 
@@ -104,6 +113,8 @@ public class DataSource
         try
         {
             conn = DriverManager.getConnection(CONNECTION_STRING);
+            // Initializing our PreparedStatement instance.
+            querySongInfoView = conn.prepareStatement(QUERY_VIEW_SONG_INFO_PREP);
             return true;
 
         }
@@ -118,6 +129,16 @@ public class DataSource
     {
         try
         {
+            // If we use a Statement ot do more than one query, which is common when using PreparedStatement,
+            // each time we need to do a new query the existing ResultSet is closed and a new one is created.
+            // So we don't have to worry about closing the ResultSet when using PreparedStatement, when we close
+            // the PreparedStatement whichever ResultSet is active would also be closed.
+            // And as it's an instance, we are going to close it in here. And the order is important.
+            if (querySongInfoView != null)
+            {
+                querySongInfoView.close();
+            }
+
             if (conn != null)
             {
                 conn.close();
@@ -239,9 +260,6 @@ public class DataSource
             while (results.next())
             {
                 SongArtist songArtist = new SongArtist();
-
-                // Using the column indexes since our query is customized, therefore it doesn't follow the table
-                // column indexes pattern.
                 songArtist.setArtistName(results.getString(1));
                 songArtist.setAlbumName(results.getString(2));
                 songArtist.setTrack(results.getInt(3));
@@ -258,7 +276,6 @@ public class DataSource
         }
     }
 
-    // The .schema command. More info on "https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSetMetaData.html".
     public void querySongsMetadata()
     {
         String sql = "SELECT * FROM " + TABLE_SONGS;
@@ -266,7 +283,6 @@ public class DataSource
         try (Statement statement = conn.createStatement();
              ResultSet results = statement.executeQuery(sql))
         {
-            // Using the method below to get the schema information from the table.
             ResultSetMetaData meta = results.getMetaData();
             int numColumns = meta.getColumnCount();
 
@@ -283,16 +299,11 @@ public class DataSource
 
     public int getCount(String table)
     {
-        // Using MIN to get the smallest ID
-        // It's good practise to name the columns
         String sql = "SELECT COUNT(*) AS count, MIN(_id) AS min_id FROM " + table;
 
         try (Statement statement = conn.createStatement();
              ResultSet results = statement.executeQuery(sql))
         {
-            // Treating the results as a columns
-            // Doing this way if we want to add more columns or change the positioning of them we don't have to worry
-            // about altering the code.
             int count = results.getInt("count");
             int min = results.getInt("min_id");
 
@@ -321,20 +332,17 @@ public class DataSource
         }
     }
 
-
-    // Querying a view
-    // SELECT name, album, track FROM artist_list WHERE title = "Go Your Own Way"
     public List<SongArtist> querySongInfoView(String title)
     {
-        StringBuilder sb = new StringBuilder(QUERY_VIEW_SONG_INFO);
-        sb.append(title);
-        sb.append("\"");
-
-        System.out.println(sb.toString());
-
-        try (Statement statement = conn.createStatement();
-             ResultSet results = statement.executeQuery(sb.toString()))
+        // Using PreparedStatement (it's worthy mentioning that this class is a subclass of Statement, that's why
+        // we can use all the methods that the Statement class provides.)
+        try
         {
+            // Using the "setString" method to specify the position of the placeholder to set the user string.
+            // For JDBC position is 1 based.
+            querySongInfoView.setString(1, title);
+            ResultSet results = querySongInfoView.executeQuery();
+
             List<SongArtist> songArtists = new ArrayList<>();
 
             while (results.next())
