@@ -1,10 +1,11 @@
 Java Networking
 
-A networking is a system of computer connected together so they can share resources and communicate with one another.
+A networking is a system of computer connected together, so they can share resources and communicate with one another.
 It refers to how the connected computers communicate.
 
 In the Java scope
-The "java.net" package contains classes for establishing connections between computers and then send messages between them.
+The "java.net" package contains classes for establishing connections between computers and then send messages between
+them.
 
 Ports are used to rout data to the correct application.
 
@@ -26,7 +27,7 @@ When used with Internet addresses, you get TCP/IP, which uses the client/server 
 
 When communicating using TCP/IP, the sequence of events is as follows:
 1. The client opens a connection to the server
-2. The clients sends a request to the server
+2. The client sends a request to the server
 3. The server sends a response to the client
 
 When using the low-level networking API, you'll use sockets to establish
@@ -39,6 +40,7 @@ same port number, but each client will have its own socket. You'll use the Socke
 class for the client socket, and the ServerSocket class for the server's socket.
 
 
+When using Java all you have to do is to provide the IP address and port when you create a socket.
 Underneath the covers, specific messages have to be sent to establish a
 connection between the client and the server (a process that's called
 handshaking), and the data has to be sent as packets, which must be in a

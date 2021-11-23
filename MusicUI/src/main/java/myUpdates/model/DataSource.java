@@ -1,12 +1,8 @@
-package tutorial.model;
+package myUpdates.model;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-// We want the Controller to be able to use this class (in a real world app we would have more than one controller, and
-// they all would need access).
-// To keep things synchronize when using data source it's quite common to use a Singleton pattern.
 
 public class DataSource
 {
@@ -142,37 +138,17 @@ public class DataSource
 
     private Connection conn;
 
-    // This is also a lazy instantiation, because the instance won't be created until the first time the class is
-    // loaded, in other words when a class calls the "getInstance()" method. The advantage of defining it here it's
-    // because it's thread safe.
     private static DataSource instance = new DataSource();
 
-    // Applying the Singleton pattern. When declaring a constructor private, only the class will be able to create
-    // instances of itself.
     private DataSource()
     {
 
     }
 
-    // This is called a lazy instantiation because the instance isn't created until the first time it's needed.
-    // However, this is not thread safe meaning that we could have more than one instance at some point if a thread
-    // returns where it shouldn't.
     public static DataSource getInstance()
     {
-//        if (instance == null)
-//        {
-//            instance = new DataSource();
-//        }
-        // For accessing methods in this class
-        // DataSource.getInstance().methodName();
-
         return instance;
     }
-
-    // For the "open()" and "close()" methods in the context of a GUI app, we would want to show data when we open the
-    // application, so the "open()" method should be called when the app executes and regarding the "close()" method
-    // we would want to execute it when the user shuts down the app since we want to display data throughout the entire
-    // process. Knowing that, we can use JavaFX methods (init and stop) to correlate with our database methods.
 
     public boolean open()
     {
@@ -278,7 +254,6 @@ public class DataSource
             List<Artist> artists = new ArrayList<>();
             while (results.next())
             {
-                // This "delay" has been added just to demonstrate the progress bar.
                 try
                 {
                     Thread.sleep(20);
@@ -302,8 +277,6 @@ public class DataSource
         }
     }
 
-    // Getting the albums with the artist ID. We are querying it based on the ID because we don't need to do the extra
-    // step to look for the artist name in the artists table.
     public List<Album> queryAlbumForArtistID(int ID)
     {
         try
@@ -474,7 +447,6 @@ public class DataSource
             insertIntoAlbums.setInt(2, artistID);
             int affectedRows = insertIntoAlbums.executeUpdate();
 
-            // Still just updating one record
             if (affectedRows != 1)
             {
                 throw new SQLException("Couldn't insert album!");
@@ -502,7 +474,7 @@ public class DataSource
 
             int affectedRecords = updateArtistName.executeUpdate();
 
-            return affectedRecords == 1; // Return true if we updated one record
+            return affectedRecords == 1;
         }
         catch (SQLException e)
         {

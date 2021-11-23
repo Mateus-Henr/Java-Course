@@ -11,24 +11,32 @@ public class Artist
     private SimpleIntegerProperty ID;
     private SimpleStringProperty name;
 
-    public SimpleIntegerProperty getID()
+    // Initializing fields
+    public Artist()
     {
-        return ID;
+        this.ID = new SimpleIntegerProperty();
+        this.name = new SimpleStringProperty();
     }
 
-    public void setID(SimpleIntegerProperty ID)
+    // We had to modify here to return String and int.
+    public int getID()
     {
-        this.ID = ID;
+        return ID.get();
     }
 
-    public SimpleStringProperty getName()
+    public void setID(int ID)
     {
-        return name;
+        this.ID.set(ID);
     }
 
-    public void setName(SimpleStringProperty name)
+    public String getName()
     {
-        this.name = name;
+        return name.get();
+    }
+
+    public void setName(String name)
+    {
+        this.name.set(name);
     }
 
 }

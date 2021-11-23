@@ -8,29 +8,39 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
-<!-- This code has been provided by Tim. -->
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<?import javafx.scene.layout.AnchorPane?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0"
-            fx:controller="tutorial.Controller" xmlns:fx="http://javafx.com/fxml/1">
+            fx:controller="myUpdates.Controller" xmlns:fx="http://javafx.com/fxml/1">
     <center>
-        <TableView fx:id="artistTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <columns>
-                <!-- We are setting the width of the column as the same as the width of the TableView. -->
-                <!-- The format used below can be used with any property. -->
-                <!-- The format used below can be used with any property. -->
-                <TableColumn prefWidth="${artistTable.width}" text="Name">
-                    <cellValueFactory>
-                        <!-- This property maps to the name field in the Artist class. -->
-                        <PropertyValueFactory property="name"/>
-                    </cellValueFactory>
-                </TableColumn>
-            </columns>
-            <BorderPane.margin>
-                <Insets right="10.0"/>
-            </BorderPane.margin>
-        </TableView>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER" prefHeight="-Infinity" prefWidth="-Infinity">
+            <TableView fx:id="artistTable">
+                <columns>
+                    <TableColumn prefWidth="${artistTable.width}" text="Name">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="name"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+                <BorderPane.margin>
+                    <Insets right="10.0"/>
+                </BorderPane.margin>
+            </TableView>
+            <TableView fx:id="albumTable">
+                <columns>
+                    <TableColumn prefWidth="${albumTable.width}" text="Name">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="name"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+                <BorderPane.margin>
+                    <Insets right="10.0"/>
+                </BorderPane.margin>
+            </TableView>
+        </AnchorPane>
     </center>
     <right>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="170.00" spacing="20.0" BorderPane.alignment="CENTER">
