@@ -46,4 +46,5 @@ public class Main
         result -= 2; // 10 - 2 = 8
         System.out.println("10 - 2" + result);
     }
+
 }

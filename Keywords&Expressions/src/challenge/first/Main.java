@@ -1,4 +1,4 @@
-package challenge;
+package challenge.first;
 
 public class Main
 {
@@ -17,4 +17,5 @@ public class Main
             //  score = 0
         }
     }
+
 }
