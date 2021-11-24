@@ -1,4 +1,4 @@
-package tutorial;
+package tutorial.first;
 
 import java.net.MalformedURLException;
 import java.net.URI;
