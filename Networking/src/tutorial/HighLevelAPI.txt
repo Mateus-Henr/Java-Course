@@ -1,0 +1,36 @@
+Modern applications are mainly interested in accessing the Internet, and they use a hig-level API to do so.
+For High-level API's we don't use sockets and ports, we use URIs and URLs.
+URI (Universal Resource Identifier) in the context of the java.net package URI is an identifier that might not
+provide enough information to access the resource it identifies.
+It can specify a relative path.
+
+URL (Universal Resource Locator) in the context of the java.net package
+A URL is an identifier that includes information about how to access the resource it identifies.
+It can specify an absolute path to get to the resource.
+
+It's easy to convert between URLs and URIs, you just need to provide info for the method.
+When using java.net is a good practise to use a URI until you actually want to access a resource, and then to
+convert the URI to a URL.
+
+Scheme
+It's a part of a URI or URL that appears before the colon. For example, "http", "file", and "ftp" are all schemes.
+Another way to define a URL is that it's a http URI.
+According to some developers the term URL is outdated and should not be used, but a lot still use it.
+When working with high-level API, we'll use the following classes: URI, URL, URLConnection and HttpURLConnection.
+
+URI
+Components:
+1 - Scheme
+2 - Scheme-specific part
+3 - Authority
+4 - User-info
+5 - Host
+6 - Port
+7 - Path
+8 - Query
+9 - Fragment
+
+Example:
+    URI = scheme ":" ["//" authority] path ["?" query] ["#" fragment]
+
+URIs that specify a scheme are called absolute URIs, when they don't specify the scheme they're called relative URIs.
