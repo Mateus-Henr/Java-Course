@@ -18,7 +18,38 @@ public class Main
         // Expression statement -> Assignment expressions, "++" and "--", method calls and object creation.
         finalScore = 60;
         playerLives--;
+
+        // PostFix
+        // When using increment or decrement operations in a "println" it'll be modified after the print has already
+        // happened. It was a PostFix because was done after the output happened.
         System.out.println("Lives remaining " + playerLives--);
+        System.out.println("Lives remaining " + playerLives);
+
+        // Prefix
+        // When the command happens before the output.
+        System.out.println("Lives = " + --playerLives);
+        System.out.println("Lives = " + ++playerLives);
+
+        // As statements the follow the same rule.
+        playerLives++;
+        System.out.println("Lives remaining " + playerLives);
+        playerLives--;
+        System.out.println("Lives remaining " + playerLives);
+        ++playerLives;
+        System.out.println("Lives remaining " + playerLives);
+        --playerLives;
+        System.out.println("Lives remaining " + playerLives);
+
+
+        if (calculatedScore++ > 59)
+        {
+            System.out.println("I calculate your score as being more than 59!");
+        }
+
+        if (++calculatedScore > 59)
+        {
+            System.out.println("I calculate your score as being more than 59!");
+        }
 
         // Control flow statement -> Conditions, looping and branching statements (break, continue, etc).
     }

@@ -14,11 +14,13 @@ public class Main
                                    "another " +
                                    "statement. "); // Statements can have in multiple lines
 
+        // If your statement is valid Java doesn't care.
+        System.out.println("Statements in the same line");
         int anotherVariable = 50;
         myVariable--;
-        System.out.println("Statements in the same line");
 
-        // Whitespace is the space between your code, for example assigning variables.
+        // Whitespace is the space between your code, for example assigning variables. Usually added for human
+        // readability purposes. It doesn't take up any memory in your final program.
         int
                 myVariable2
                 =
@@ -41,3 +43,5 @@ public class Main
     // Expression statement -> Assignment expressions, "++" and "--", method calls and object creation.
     // Control flow statement -> Conditions, looping and branching statements (break, continue, etc).
 }
+
+// Code block are the parts of the code surrounded by "{}".

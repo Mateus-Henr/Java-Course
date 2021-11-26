@@ -24,8 +24,9 @@ public class Main
         }
     }
 
-    private static int calculateFinalScore(int score, int levelCompleted, int bonus) // Avoid duplication in the future because here you can manage possible
-    {                                                                                // additional bonus and stuff.
+    // Avoid duplication in the future because here you can manage possible additional bonus and stuff.
+    private static int calculateFinalScore(int score, int levelCompleted, int bonus)
+    {
         // int finalScore = score + (levelCompleted * bonus);
         return score + (levelCompleted * bonus);
     }

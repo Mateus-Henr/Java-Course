@@ -1,0 +1,7 @@
+This project is the "music.ui" project from the course. It has been reused to show how you could update it to Java 9.
+Also, we are separating stuff in the modules being them database, UI and models.
+Each module requires its own libraries, also you have to inform the "exports", "opens" and "requires" in the
+"module-info.java".
+You can click "Alt" + "Enter" where the errors are to identify what you need to do in the project, or you can just
+let IntelliJ try to fix the errors fo you. When it's missing libraries you can go to the "Problems" tab and click on
+"Fix" and when it's a problem with missing something in the module just use those keys and select IntelliJ suggestions.
