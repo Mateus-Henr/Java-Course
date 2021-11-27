@@ -24,6 +24,7 @@ public class Main
         // As it's an int number the decimal places are discarded.
         while ((lastDigit = number % 10) > 0)
         {
+            System.out.println(lastDigit);
             sum += lastDigit;
             number = number / 10; // Taking the digit out because it has already been checked.
         }

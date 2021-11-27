@@ -5,3 +5,18 @@ Each module requires its own libraries, also you have to inform the "exports", "
 You can click "Alt" + "Enter" where the errors are to identify what you need to do in the project, or you can just
 let IntelliJ try to fix the errors fo you. When it's missing libraries you can go to the "Problems" tab and click on
 "Fix" and when it's a problem with missing something in the module just use those keys and select IntelliJ suggestions.
+
+
+Transitive dependency
+Let's say that we have modules A, B and C.
+When module A requires module B, module A can read public and protected types exported in module B.
+If module B also requires module C, module B can have methods that return types exported in module C.
+
+In other project we currently have three modules common, db and ui.
+Module db requires/reads common, while module ui reads both db and common.
+Module db or actually DataSource class has some methods that return types from module common. So every module that uses
+the DataSource class will require common module as well.
+
+So we need to figure out a way to make modules that read the db module be automatically able to read the common module,
+and this is where transitive dependencies come in. We can do that by using the keyword "transitive" instead of
+just "requires".

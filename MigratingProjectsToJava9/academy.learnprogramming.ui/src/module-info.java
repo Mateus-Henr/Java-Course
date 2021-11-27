@@ -4,11 +4,16 @@ module academy.learnprogramming.ui
     // "projects" will be necessary to run the project.
     // A circular dependency is a relation between two or more modules which either directly or indirectly depend
     // on each other to function properly.
-    requires javafx.base;
-    requires javafx.graphics;
+
+    // We can optimize our requirements by looking module by module and se if any of them are using the "transitive"
+    // keyword to require any module that we are currently requiring and if that's happening we can delete the
+    // module that is being "transitive" required.
+//    requires javafx.base; // Being used by a transitive statement somewhere else.
+//    requires javafx.graphics;
     requires javafx.fxml;
     requires javafx.controls;
-    requires academy.learnprogramming.common;
+    // Using transitive dependency for this module.
+//    requires academy.learnprogramming.common;
     requires academy.learnprogramming.db;
 
     // Using the "to" we export to a specific module.
