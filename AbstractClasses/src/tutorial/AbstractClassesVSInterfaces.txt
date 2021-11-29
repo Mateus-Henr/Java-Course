@@ -1,0 +1,42 @@
+Abstract class vs Interfaces
+
+Abstract Class
+You cannot instantiate them and they may contain a mix of methods declared with or without an implementation.
+You can declare fields that are not static, and final, and define public, protected, and private concrete methods.
+Can only extend one class, but it can implement multiple interfaces.
+When an Abstract class is subclassed, the subclass usually provides implementations for all the abstract methods in
+its parent class. However, if it does not, then the subclass must also be declared abstract.
+
+When to use it
+It's used when you want to share code among several closely related classes (Animal - with fields name, age...).
+If you expect classes that extend your abstract class to have many common methods or fields or required access
+modifiers other than public (protected, private).
+When you want to declare non-static or non-final fields (for example name, age), this enables you to define methods that
+ can access and modify the state of an object (getName, setName).
+When you have a requirement for your base class to provide a default implementation of certain methods but other methods
+should be open to being overridden by child classes.
+Summary: The purpose of Abstract class is to provide a common definition of a base class that multiple derived classes
+can share.
+
+Interface
+An interface is just the declaration of methods of a class, it's not the implementation.
+In an interface, we define what kind of operation an object can perform. These operations are defined by the classes
+that implement that interface.
+Interfaces form a contract between the class and the outside world, and this contract is enforced at build time by the
+compiler.
+You cannot instantiate interfaces and they may contain a mix of methods declared with or without an implementation. All
+methods in interfaces are automatically public and abstract.
+An interface can extend another interface.
+Interfaces are more flexible and can deal with a lot more stress on the design of your program than the implementation.
+By introducing interfaces into your program, you are really introducing points of variation at which you can plug in
+different implementations for that interface.
+Interfaces primary purpose is abstraction, decoupling the "what" from the "how".
+It can contain private methods (commonly used when two default methods in an Interface share common code).
+
+When you use it
+When you expect that unrelated classes will implement your interface. For example, the interfaces Comparable and
+Cloneable are implemented by many unrelated classes.
+When you want to specify the behaviour of a particular data type, but are not concerned about who implements its
+behaviour.
+When you want to separate different behaviour.
+The Collections API is an example where we have the List interface and implementations ArrayList and LinkedList.
