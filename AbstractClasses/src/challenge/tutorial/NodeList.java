@@ -8,6 +8,6 @@ public interface NodeList
 
     boolean removeItem(ListItem item);
 
-    void traverse(ListItem item);
+    void traverse(ListItem root);
 
 }
